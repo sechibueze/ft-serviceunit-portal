@@ -1,0 +1,33 @@
+
+
+
+    .sg-wrapper {
+      display: grid;
+      grid-template-columns: 30% 30% 30%;
+      grid-gap: 10px;
+      justify-content: center;
+      justify-items: center;
+    }
+
+    .sg-card {
+      margin-bottom: 15px;
+      text-align: center;
+
+    }
+
+    .su-logo {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      margin: 10px auto;
+    }
+
+    .sg-title {
+      margin: auto;
+      padding: 8px 0px;
+    }
+
+    .sg-intro {
+      padding: 10px;
+      margin-bottom: 15px;
+    }

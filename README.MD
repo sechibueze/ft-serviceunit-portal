@@ -1,7 +1,7 @@
-# ft-sg-portal
-
+# ft-serviceunit-portal
+An online application software - portal for service groups at faith tabernacle during shiloh 2019
 ### Dependencies
-- npm i express cors multer pg
+
 ### Entity Spec
 
 - Unit

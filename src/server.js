@@ -1,0 +1,51 @@
+const express = require('express');
+const path = require('path');
+const dotenv = require('dotenv');
+const session = require('express-session');
+const app = express();
+dotenv.config();
+const port = process.env.PORT || 3000;
+
+
+// Controllers
+// const loginController = require('./controllers/loginController');
+// const registerController = require('./controllers/registerController');
+// const confirmController = require('./controllers/confirmController');
+// const resetController = require('./controllers/resetController');
+// const authController = require('./controllers/authController');
+
+// Set up express to parse request body
+app.use(express.json());
+app.use(express.urlencoded());
+app.use(session({ secret: 'keepitsecret', saveUninitialized: false, resave: false }));
+
+// Static assests
+app.use(express.static(path.join(__dirname, '/public/')));
+// views & view engine
+app.set('views', path.join(__dirname, '/views/'));
+app.set('view engine', 'ejs');
+app.use((req, res, next) => {
+  res.locals.result = {};
+  res.locals.message = '';
+  next();
+});
+
+
+
+// app.use('/login', loginController);
+// app.use('/register', registerController);
+// app.use('/confirm', confirmController);
+// app.use('/', loginController);
+// app.use('/reset', resetController);
+// app.use('/auth', authController);
+
+app.use('/', (req, res, next) => {
+  return res.render('serviceunits');
+});
+app.use((req, res, next) => {
+  return res.render('error', { message: 'Oops! It looks like you missed your way' });
+});
+
+app.listen(port, () => {
+  console.log(`App running on :  ${port}`);
+});
