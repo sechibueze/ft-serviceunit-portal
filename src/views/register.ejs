@@ -1,0 +1,88 @@
+<% include partials/head %>
+
+
+<body>
+
+  <div class="container">
+    <h1 class="section-heading"><%= result.unit %> Member Registeration</h1>
+    <form name="member-reg" method="POST" action="<%= result.posturl %>">
+
+      <article class="message"> </article>
+
+      <div class="form-group">
+        <label for="member-id">Unit ID:</label>
+        <input type="text" name="unit_id" class="form-control" value="">
+      </div>
+
+      <div class="form-group">
+        <label for="surname">Surname: </label>
+        <input name="surname" type="text" value="" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="firstname">Firstname:</label>
+        <input type="text" required name="firstname" class="form-control">
+      </div>
+
+      <!-- <div class="form-group">
+        <label for="middlename">Middlename:</label>
+        <input type="text" required name="middlename" class="form-control">
+      </div> -->
+
+
+      <div class="form-element">
+        <label for="phone">Phone:</label>
+        <input type="tel" required name="phone" placeholder="080XXXXXXXX" minlength="11" maxlength="11"
+          class="form-control">
+      </div>
+      <!-- <div class="form-group">
+        <label for="gender">Unit:</label>
+        <select required name="team" class="form-control">
+        </select>
+      </div> -->
+      <div class="form-element">
+        <label for="group">Gender:</label>
+        <select name="gender" required class="form-control">
+          <option value="MALE">Male</option>
+          <option value="FEMALE">Female</option>
+
+        </select>
+      </div>
+      <!-- <div class="form-group">
+        <label for="part">Part:</label>
+        <select name="part" required class="form-control">
+          <option value="ALTO">Alto</option>
+          <option value="SUPRANO">Suprano</option>
+          <option value="TENOR">Tenor</option>
+          <option value="MUSICIAN">Musician</option>
+        </select>
+      </div> -->
+
+      <div class="form-group">
+        <label for="availability"> Shiloh 2019 Availability:</label>
+        <div class="row clearfix">
+
+          <label class="form-control"><input type="checkbox" value="TUES" name="availability"> Tuesday</label>
+          <label class="form-control"><input type="checkbox" value="WEDS" name="availability"> Wednesday</label>
+          <label class="form-control"><input type="checkbox" value="THURS" name="availability"> Thursday</label>
+          <label class="form-control"><input type="checkbox" value="FRI" name="availability"> Friday</label>
+          <label class="form-control"><input type="checkbox" value="SAT" name="availability"> Saturday</label>
+          <label class="form-control"><input type="checkbox" value="SUN" name="availability"> Sunday</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="accomodation">Accomodation:</label>
+        <div class="row ">
+          <label class="form-control"><input type="radio" value="YES" name="accomodation"> Yes</label>
+          <label class="form-control"><input type="radio" value="NO" name="accomodation"> No</label>
+
+        </div>
+      </div>
+      <hr>
+      <button type="submit" class="btn btn-success">Register</button>
+    </form>
+  </div>
+
+</body>
+
+</html>

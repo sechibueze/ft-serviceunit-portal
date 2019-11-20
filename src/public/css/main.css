@@ -1,6 +1,6 @@
 
 
-
+/* serviceunits */
     .sg-wrapper {
       display: grid;
       grid-template-columns: 30% 30% 30%;
@@ -10,8 +10,11 @@
     }
 
     .sg-card {
-      margin-bottom: 15px;
+      margin: 15px;
       text-align: center;
+      box-shadow: 0 0 4px #222;
+      border-radius: 15px;
+      padding: 20px 10px;
 
     }
 
@@ -30,4 +33,146 @@
     .sg-intro {
       padding: 10px;
       margin-bottom: 15px;
+    }
+
+
+    /* Auth */
+ /* Wrapper */
+    .admin-wrapper {
+      display: grid;
+      grid-template-columns: 150px auto;
+      grid-template-rows: 100% 100%;
+      grid-column-gap: 12px;
+    }
+
+    .aside {
+      color: #999;
+      background: #100;
+      padding: 7px 7px 100% 12px;
+      position: relative;
+    }
+
+    .appname {
+      padding: 12px 0px;
+      border-bottom: 1px solid #ddd;
+
+    }
+
+    .sidebar-toggle-btn {
+      font-size: 1rem;
+      position: absolute;
+      right: 7px;
+      top: 3px;
+      padding: 3px;
+      cursor: pointer;
+    }
+
+    .admin-menu-icon {
+      display: none;
+      padding: 5px;
+      cursor: pointer;
+    }
+
+    ul.options {
+      width: 100%;
+
+    }
+
+    ul.options li {
+      margin: 4px auto;
+      text-align: left;
+      cursor: pointer;
+      padding: 5px 0px;
+    }
+
+    ul.options li:hover {
+      opacity: .8;
+    }
+
+    .options li a {
+      color: #ddd;
+    }
+
+    .options .fa {
+      margin-righ t: 12px;
+      padding: 0px 10px;
+    }
+
+    /* 
+    * When a .wrapper-mini is added to .wrapper, effect a mini version
+    * of the side bar
+    */
+
+    .admin-wrapper.admin-wrapper-mini {
+      grid-template-columns: 60px auto;
+    }
+
+    .admin-wrapper-mini .admin-logo,
+    .admin-wrapper-mini .sidebar-toggle-btn,
+    .admin-wrapper-mini .options li a {
+      display: none;
+    }
+
+    .admin-wrapper-mini .admin-menu-icon {
+      display: inline;
+    }
+
+    /* Admin Nav Bar */
+    .admin-navbar {
+      position: sticky;
+      top: 10px;
+      border-bottom: 1px solid #999;
+    }
+
+    /* Auth */
+    
+  }
+
+  /* Member Reg */
+  
+    
+
+    div.row.clearfix {
+      margin-left: 40%;
+    }
+
+    .form-group .row label {
+      display: block;
+      margin: 10px auto;
+      margin-left: 40%;
+
+    }
+
+    .form-group .row label input {
+      margin: 8px;
+    }
+
+    form[name="member-reg"] .btn {
+      display: block;
+      margin: 12px auto;
+    }
+
+
+    .form-element,
+    .form-group {
+      display: block;
+      margin: 10px auto;
+    }
+
+
+    .form-element .form-control {
+      display: block;
+    }
+
+    
+
+   
+    form[name="member-reg"] .btn {
+      display: block;
+      margin: 12px auto;
+    }
+
+    form hr {
+      padding: 10px 0px;
+      margin: 12px auto;
     }

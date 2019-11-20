@@ -1,0 +1,36 @@
+<% include partials/head %>
+
+<body>
+  <div class="admin-wrapper">
+    <div class="aside">
+      <% include partials/admin-sidebar %>
+    </div>
+    <div class="main">
+      <div class="admin-navbar">
+        <h1> Admin NavBar</h1>
+      </div>
+      <% if (result.message){%>
+      <div class="message"><%= result.message %></div>
+      <%} %>
+
+      <form action="/auth/admin" method="POST">
+        <div class="form-element">
+          <label for="unit_id">Unit ID</label>
+          <input name="unit_id" type="text" required />
+        </div>
+
+        <div class="form-element">
+          <label for="unit">Unit </label>
+          <input name="unit" type="text" required />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Add Unit</button>
+      </form>
+    </div>
+
+  </div>
+
+  <script src="/js/admin-sidebar.js"></script>
+</body>
+
+</html>

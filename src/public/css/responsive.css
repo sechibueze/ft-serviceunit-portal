@@ -1,0 +1,23 @@
+@media(max-width: 559px){
+  body{
+    background: #ccc;
+  }
+  .sg-wrapper, .sg-card{
+    display: block;
+  }
+  form[method="POST"]{
+    width: 100%;
+  }
+}
+
+@media(max-width: 760px) and (min-width: 560px){
+  body{
+    background: #ddd;
+  }
+  form[method]{
+    width: 85%;
+  }
+  .sg-wrapper{
+    grid-template-columns: 45% 45%;
+  }
+}

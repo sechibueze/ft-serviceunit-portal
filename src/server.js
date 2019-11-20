@@ -10,13 +10,13 @@ const port = process.env.PORT || 3000;
 // Controllers
 // const loginController = require('./controllers/loginController');
 // const registerController = require('./controllers/registerController');
-// const confirmController = require('./controllers/confirmController');
-// const resetController = require('./controllers/resetController');
-// const authController = require('./controllers/authController');
+const indexController = require('./middlewares/unitList');
+const unitsController = require('./controllers/unitsController');
+const authController = require('./controllers/authController');
 
 // Set up express to parse request body
 app.use(express.json());
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true }));
 app.use(session({ secret: 'keepitsecret', saveUninitialized: false, resave: false }));
 
 // Static assests
@@ -25,7 +25,9 @@ app.use(express.static(path.join(__dirname, '/public/')));
 app.set('views', path.join(__dirname, '/views/'));
 app.set('view engine', 'ejs');
 app.use((req, res, next) => {
-  res.locals.result = {};
+  res.locals.result = {
+    query: req.query
+  };
   res.locals.message = '';
   next();
 });
@@ -37,11 +39,9 @@ app.use((req, res, next) => {
 // app.use('/confirm', confirmController);
 // app.use('/', loginController);
 // app.use('/reset', resetController);
-// app.use('/auth', authController);
-
-app.use('/', (req, res, next) => {
-  return res.render('serviceunits');
-});
+app.use('/auth', authController);
+app.use('/units', unitsController);
+app.use('/', indexController);
 app.use((req, res, next) => {
   return res.render('error', { message: 'Oops! It looks like you missed your way' });
 });

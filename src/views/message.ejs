@@ -1,0 +1,17 @@
+<% let title = 'Invalid' %>
+<% include partials/head %>
+
+<body>
+  <div class="container">
+    <div class="error">
+      <h1 class="error404"> Attention </h1>
+      <% if (result) {%>
+      <article class="message"> <%= result.message %></article>
+      <%}%>
+         
+      </div>
+  </div>
+  <script src=""></script>
+</body>
+
+</html>

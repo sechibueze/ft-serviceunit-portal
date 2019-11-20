@@ -2,6 +2,7 @@
       box-sizing: border-box;
       padding: 0;
       margin: 0;
+       font-family: 'Montserrat', sans-serif;
 
     }
 
@@ -18,11 +19,7 @@
       text-decoration: none;
     }
 
-    .container {
-      width: 80%;
-      margin: auto;
-
-    }
+    
 
     .clearfix::after {
       display: block;
@@ -30,24 +27,63 @@
       clear: both;
     }
 
-    .btn {
-      padding: 8px 12px;
-      text-align: center;
-      border-radius: 4px;
-      outline: 0px;
-      box-shadow: 0 0 2px #222;
-      border: 1px solid #100;
-    }
 
-    .btn-success {
-      color: #ddd;
-      background: green;
-    }
+    
+  .container {
+    width: 80%;
+    margin: auto;
 
-    .btn-primary {
-      background: blueviolet;
-      color: #fff;
-    }
+  }
+
+ 
+
+  .btn {
+    padding: 8px 12px;
+    text-align: center;
+    border-radius: 4px;
+    outline: 0px;
+    box-shadow: 0 0 2px #222;
+    border: 1px solid #100;
+  }
+
+  .btn-success {
+    color: #ddd;
+    background: green;
+  }
+
+  .btn-primary {
+    background: blueviolet;
+    color: #fff;
+  }
+
+  form {
+    width: 60%;
+    margin: auto;
+    border-radius: 15px;
+    box-shadow: 0 0 4px #222;
+    padding: 20px;
+
+  }
+
+
+  .form-element {
+    display: block;
+    margin: 10px auto;
+  }
+
+
+
+  .form-control[type="text"], [type="tel"], select {
+    width: 100%;
+    padding: 5px 4px;
+    font-size: 1.2rem;
+    outline: 0;
+    margin-top: 6px;
+  }
+
+  .form-element .form-control {
+    display: block;
+  }
 
     .section-heading {
       text-align: center;
