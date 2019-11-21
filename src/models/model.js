@@ -8,6 +8,7 @@ module.exports = class Model {
 
   select(fields, clause = '') {
     const query = `SELECT ${fields} FROM ${this.table} ${clause}`;
+    // console.log('select Query:', query)
     return this.pool.query(query);
   }
 

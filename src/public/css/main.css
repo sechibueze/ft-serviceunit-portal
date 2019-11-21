@@ -1,4 +1,6 @@
-
+img.banner{
+  max-height: 100px;
+}
 
 /* serviceunits */
     .sg-wrapper {
@@ -28,6 +30,7 @@
     .sg-title {
       margin: auto;
       padding: 8px 0px;
+      text-transform: capitalize;
     }
 
     .sg-intro {
@@ -94,7 +97,7 @@
     }
 
     .options .fa {
-      margin-righ t: 12px;
+      margin-right: 12px;
       padding: 0px 10px;
     }
 
@@ -126,7 +129,7 @@
 
     /* Auth */
     
-  }
+  
 
   /* Member Reg */
   

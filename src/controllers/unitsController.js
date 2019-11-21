@@ -13,16 +13,23 @@ const router = express.Router();
 
 
 router.get('/:unit', (req, res) => {
-  const data = {
-    result: {
-      posturl: `/units/${req.params.unit}`,
-      unit: req.params.unit.toUpperCase()
+  Unit.select('unit', `WHERE unit_id = '${req.params.unit}'`)
+    .then(({ rows }) => {
+      const data = {
+        result: {
+          posturl: `/units/${req.params.unit}`,
+          unit: rows[0].unit.toUpperCase()
 
-    }
-  }
-  return res.render('register', data);
-  
-  
+        }
+      }
+      return res.render('register', data);
+
+
+    }).catch(e => {
+      res.redirect('/');
+    });
+
+
 });
 
 router.post('/:unit', (req, res) => {
@@ -61,8 +68,8 @@ router.post('/:unit', (req, res) => {
       const text = `
       IHD!
       Dear ${surname}-${unit_id}, 
+      Thank you for registering to serve at Shiloh 2019. Please, take note of your OTP for future reference.
       Your OTP is: ${otp};
-      Kindly come to FA Multi-purpose hall for Shiloh 2019 Accreditation
       `;
       const data = {
         result: {
