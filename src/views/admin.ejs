@@ -13,19 +13,19 @@
       <div class="message"><%= result.message %></div>
       <%} %>
 
-      <form action="/auth/admin" method="POST">
-        <div class="form-element">
-          <label for="unit_id">Unit ID</label>
-          <input name="unit_id" type="text" required />
-        </div>
+      <% if( result.query.unit_list){ %>
+      <% include partials/unit_list %>
+      <%} else if(result.query.add_unit) {%>
+      <% include partials/unit_add %>
+      <%} else if(result.query.members) {%>
+      <% include partials/member_list %>
+      <%} else if(result.query.data_reset) {%>
+      <% include partials/data_reset %>
+      <%} else {%>
+      <div> What do you want to do</div>
+      <%}%>
 
-        <div class="form-element">
-          <label for="unit">Unit </label>
-          <input name="unit" type="text" required />
-        </div>
-
-        <button type="submit" class="btn btn-primary">Add Unit</button>
-      </form>
+      
     </div>
 
   </div>

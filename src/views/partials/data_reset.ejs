@@ -1,0 +1,11 @@
+<form method="POST" action="/admin/data_reset">
+  <div class="message">This process is IRREVERSIBLE</div>
+  <div class="form-element">
+    <select name="data_to_reset">
+      <option value="others" selected>Others</option>
+      <option value="members">Members</option>
+      <option value="units">Units</option>
+    </select>
+  </div>
+  <button type="submit" class="btn btn-danger">Reset</button>
+</form>

@@ -1,0 +1,28 @@
+<div class="">
+
+  <% if(result.data.length > 0){
+    let count = 0 %>
+  <!-- Put up table -->
+  <table class="table">
+    <thead>
+      <tr>
+        <th>S/N</th>
+        <th>Unit_ID</th>
+        <th>Unit</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% result.data.forEach(record => {
+        %>
+      <tr>
+        <td><%= ++count %></td>
+        <td><%= record.unit_id %></td>
+        <td><%= record.unit %></td>
+      </tr>
+      <%})%>
+    </tbody>
+
+  </table>
+  <% }%>
+
+</div>

@@ -1,5 +1,11 @@
 img.banner{
-  max-height: 100px;
+  width: 80%;
+  display: block;
+  margin: auto;
+  text-align: center;
+  max-height: 150px;
+  border-radius: 7px;
+  box-shadow: 0 0 2px #100;
 }
 
 /* serviceunits */
@@ -135,9 +141,9 @@ img.banner{
   
     
 
-    div.row.clearfix {
+    /* div.row.clearfix {
       margin-left: 40%;
-    }
+    } */
 
     .form-group .row label {
       display: block;

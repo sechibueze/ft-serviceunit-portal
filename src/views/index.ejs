@@ -7,7 +7,7 @@
       <h1 class="section-heading"> Please select your Service Group & Proceed </h1>
       <div class="sg-wrapper">
         <% if(result.data) {
-          result.data.forEach(record => {
+          result.data.sort() .forEach(record => {
         %>
 
         <div class="sg-card">
