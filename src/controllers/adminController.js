@@ -66,10 +66,12 @@ router.post('/', (req, res) => {
     req.body.unit
   ];
   Unit.insertQuery(text, values).then(({ rows }) => {
+    // console.log('rows : ', rows)
     const data = {
       result: {
         query: req.query,
         message: 'Inserted successfully',
+        admin: req.session.auth,
         data: rows[0]
       }
     };
@@ -77,6 +79,7 @@ router.post('/', (req, res) => {
   }).catch(e => {
     const data = {
       result: {
+        admin: req.session.auth,
         message: 'Inserted failed'
       }
     };
