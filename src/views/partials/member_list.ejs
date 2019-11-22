@@ -1,43 +1,46 @@
 <div class="">
-  members
-  <div class="">
 
-    <% if(result.data.length > 0){
+  <% if(result.data.length > 0){
       let count = 0 %>
-    <!-- Put up table -->
-    <table class="table">
-      <thead>
-        <tr>
-          <th>S/N</th>
-          <th>Surname</th>
-          <th>Firstname</th>
-          <th>Unit</th>
-          <th>OTP</th>
-          <th>Phone</th>
-          <th>Gender</th>
-          <th>Availability</th>
-          <th>Accomodation</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% result.data.forEach(record => {
+  <!-- Put up table -->
+  <h1 class="section-heading">List of Registered Members </h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>S/N</th>
+        <th>Surname</th>
+        <th>Firstname</th>
+        <th>Unit</th>
+        <th>OTP</th>
+        <th>Phone</th>
+        <th>Gender</th>
+        <th>Availability</th>
+        <th>Station</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% result.data.forEach(record => {
           %>
-        <tr>
-          <td><%= ++count %></td>
-          <td><%= record.surname %></td>
-          <td><%= record.firstname %></td>
-          <td><%= record.unit %></td>
-          <td><%= record.otp %></td>
-          <td><%= record.phone %></td>
-          <td><%= record.gender %></td>
-          <td><%= record.availability %></td>
-          <td><%= record.accomodation %></td>
-        </tr>
-        <%})%>
-      </tbody>
+      <tr>
+        <td><%= ++count %></td>
+        <td><%= record.surname %></td>
+        <td><%= record.firstname %></td>
+        <td><%= record.unit %></td>
+        <td><%= record.otp %></td>
+        <td><%= record.phone %></td>
+        <td><%= record.gender %></td>
+        <td><%= record.availability %></td>
+        <td><%= record.station %></td>
+        <td><a href="/admin/members/<%= record.otp %>/delete">Delete</a></td>
+      </tr>
+      <%})%>
+    </tbody>
 
-    </table>
-    <% }%>
+  </table>
+  <% } else {%>
+  <h1 class="section-heading">No Registration Yet </h1>
+  <%}%>
 
-  </div>
+  
 </div>

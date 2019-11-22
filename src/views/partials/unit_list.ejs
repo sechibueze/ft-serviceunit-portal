@@ -9,6 +9,7 @@
         <th>S/N</th>
         <th>Unit_ID</th>
         <th>Unit</th>
+        <th>Delete</th>
       </tr>
     </thead>
     <tbody>
@@ -18,6 +19,7 @@
         <td><%= ++count %></td>
         <td><%= record.unit_id %></td>
         <td><%= record.unit %></td>
+        <td><a href="/admin/units/<%= record.unit_id %>/delete">Delete</a></td>
       </tr>
       <%})%>
     </tbody>

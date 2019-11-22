@@ -3,9 +3,12 @@
 
 <body>
   <div class="container">
-    <div class="error">
-      <h1 class="error404"> Attention </h1>
-      <% if (result) {%>
+    <div class="flash-message">
+      <% if (result.status) {%>
+      <h1 class="section-heading"> <%= result.status %></h1>
+      <%}%>
+      
+      <% if (result.message) {%>
       <article class="message"> <%= result.message %></article>
       <%}%>
          

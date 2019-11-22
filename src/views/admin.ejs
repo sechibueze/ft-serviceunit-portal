@@ -7,21 +7,28 @@
     </div>
     <div class="main">
       <div class="admin-navbar">
-        <h1> Admin NavBar</h1>
+        <% if (result.admin.firstname){%>
+        <h1> Admin <%= result.admin.firstname %></h1>
+
+        <%} %>
+
       </div>
       <% if (result.message){%>
       <div class="message"><%= result.message %></div>
       <%} %>
 
-      <% if( result.query.unit_list){ %>
-      <% include partials/unit_list %>
-      <%} else if(result.query.add_unit) {%>
-      <% include partials/unit_add %>
-      <%} else if(result.query.members) {%>
-      <% include partials/member_list %>
-      <%} else if(result.query.data_reset) {%>
-      <% include partials/data_reset %>
-      <%} else {%>
+      <div class="">
+        <% if( result.query.unit_list){ %>
+        <% include partials/unit_list %>
+        <%} else if(result.query.add_unit) {%>
+        <% include partials/unit_add %>
+        <%} else if(result.query.members) {%>
+        <% include partials/member_list %>
+        <%} else if(result.query.data_reset) {%>
+        <% include partials/data_reset %>
+        <%} else {%>
+      </div>
+      <br><br>
       <div> What do you want to do</div>
       <%}%>
 

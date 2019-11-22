@@ -37,7 +37,7 @@ const createTables = () => {
       unit VARCHAR(255) NOT NULL ,     
       gender VARCHAR(255) NOT NULL ,
       phone VARCHAR(255) NOT NULL UNIQUE,
-      accomodation VARCHAR(255) NOT NULL,
+      station VARCHAR(255) NOT NULL,
      
       availability TEXT[] NOT NULL,
       otp VARCHAR(255) NOT NULL UNIQUE, 

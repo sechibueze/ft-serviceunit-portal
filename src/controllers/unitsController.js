@@ -42,13 +42,13 @@ router.post('/:unit', (req, res) => {
   // Generate OTP - One Time Password
   const otp = otpg.generate(6, { uppercase: false, specialChars: false });
   // Retrieve all member variables
-  const { unit_id, firstname, surname, phone, gender, availability, accomodation } = member;
+  const { unit_id, firstname, surname, phone, gender, availability, station } = member;
 
   // Build SQL Query
   const text = `INSERT INTO members (
     unit_id, firstname, surname,
     phone, unit, gender, 
-    availability, accomodation, otp) 
+    availability, station, otp) 
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
     RETURNING surname, unit_id, otp, phone`;
 
@@ -57,7 +57,7 @@ router.post('/:unit', (req, res) => {
   const values = [
     unit_id, firstname, surname,
     phone, req.params.unit, gender, availability,
-    accomodation, otp
+    station, otp
   ];
 
   // const pgSQL = format('INSERT INTO members (unit_id, firstname, surname, phone, unit, gender, availability, accomodation, otp) VALUES (%L) RETURNING surname, otp, phone, unit_id', values);
@@ -83,12 +83,16 @@ router.post('/:unit', (req, res) => {
     })
     .catch(e => {
 
-      return res.render('error',
-        { message: `Unprocessed: You may have registered, please confirm` });
+      const data = {
+        result: {
+          message: `Unprocessed: You may have registered, please confirm`,
+          status: 'Attention !!!'
+        }
+      }
+      return res.render('message', data);
+
     });
-
 });
-
 
 
 

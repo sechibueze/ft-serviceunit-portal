@@ -4,22 +4,39 @@ const Member = new Model('members');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  const data = [];
-  return res.render('confirm', { data });
+  const output = {
+    result: {
+      data: [],
+      message: ''
+    }
+  };
+  return res.render('confirm', output);
 });
 router.post('/', (req, res) => {
-  const { otp, choir_id } = req.body;
-  // AND otp = '${otp}'
-  const clause = `WHERE choir_id = '${choir_id}'`;
+  const output = {
+    result: {
+      data: [],
+      message: ''
+    }
+  };
+
+  // return console.log(req.body)
+  const { unit_id } = req.body;
+
+  const clause = `WHERE unit_id = '${unit_id}'`;
   Member.select('*', clause)
     .then(({ rows }) => {
-      const data = rows;
-      if (data.length === 0) {
-        return res.render('confirm', { message: 'Record Not found' });
-      } else {
-        const message = "Record Found";
+      // const data = rows;
+      if (rows.length === 1) {
+        output.result.message = "Record Found";
+        output.result.data = rows;
 
-        return res.render('confirm', { data, message });
+        return res.render('confirm', output);
+
+
+      } else {
+        output.result.message = 'Record Not found';
+        return res.render('confirm', output);
       }
 
 

@@ -1,14 +1,13 @@
-<% let title = 'Member Confirmation' %>
 <% include partials/head %>
 
 <body>
   <% include partials/navbar %>
   <div class="container">
 
-    <% if(data.length === 1) {
-    data.forEach(member => {
-      let count = 0;
-  %>
+    <% if(result.data.length === 1) {
+      result.data.forEach(member => {
+        let count = 0;
+    %>
 
     <table>
       <thead>
@@ -19,8 +18,8 @@
       </thead>
       <tbody>
         <tr>
-          <th>Choir ID:</th>
-          <td><%= member.choir_id %></td>
+          <th>Unit ID:</th>
+          <td><%= member.unit_id %></td>
         </tr>
         <tr>
           <th>Surname: </th>
@@ -31,8 +30,8 @@
           <td><%= member.firstname %></td>
         </tr>
         <tr>
-          <th>Middlename</th>
-          <td><%= member.middlename %></td>
+          <th>Station</th>
+          <td><%= member.station %></td>
         </tr>
         <tr>
           <th>Phone</th>
@@ -46,22 +45,12 @@
           <th>Availability: </th>
           <td><%= member.availability %></td>
         </tr>
-        <tr>
-          <th>Accomodation:</th>
-          <td><%= member.accomodation %></td>
-        </tr>
+
         <tr>
           <th>Gender :</th>
           <td><%= member.gender %></td>
         </tr>
-        <tr>
-          <th>Part</th>
-          <td><%= member.part %></td>
-        </tr>
-        <tr>
-          <th> Group:</th>
-          <td><%= member.team %></td>
-        </tr>
+
       </tbody>
     </table>
     <% 
@@ -70,17 +59,22 @@
 
     <h1 style="text-align: center;"> Confirm Registration </h1>
     <form name="member-login" method="POST" action="/confirm">
-      <% if (message) {%>
-      <article class="message"> <%= message %>:(</article>
+      <% if (result.message) {%>
+      <article class="message"> <%= result.message %></article>
       <%}%>
               <div class="form-group">
-                <label for="choir_id">Member ID:</label>
-                <input type="text" maxlength="9" pattern="^(FTCHR)\d{4}" title="You have not entered a valid ID" name="choir_id" required class="form-control" placeholder="Enter your ID">
+                <!-- <label for="choir_id">Find By:</label>
+                <select name="criterion">
+                  <option value="phone">Phone Number</option>
+                  <option value="unit_id">Unit ID</option>
+                </select> -->
+                 
               </div>
-              <!-- <div class="form-group">
-                <label for="otp">OTP:</label>
-                <input type="text" minlength="6" maxlength="6" name="otp" class="form-control" placeholder="Enter your OTP">
-              </div> -->
+              <div class="form-group">
+                <label for="value">Member ID:</label>
+                <input type="text"  name="unit_id" required class="form-control" >
+              </div>
+              
               <button name="search" type="submit" class="btn">Search <i class="fa fa-search"></i></button>
             </form>
 

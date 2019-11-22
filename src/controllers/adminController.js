@@ -2,6 +2,7 @@ const express = require('express');
 
 const Model = require('../models/model');
 const sortObjArray = require('../helpers/sortObjArray');
+
 const Member = new Model('members');
 const Unit = new Model('units');
 const router = express.Router();
@@ -13,7 +14,8 @@ const router = express.Router();
 router.get('/', (req, res) => {
   let output = {
     result: {
-      query: req.query
+      query: req.query,
+      admin: req.session.auth
     }
   }
   if (req.query.unit_list) {
@@ -27,7 +29,7 @@ router.get('/', (req, res) => {
   } else if (req.query.members) {
     Member.select('*').then(({ rows }) => {
       output.result.data = sortObjArray(rows, 'unit');
-      console.log('data', rows[0])
+
       return res.render('admin', output);
     }).catch(e => {
       res.redirect('/admin');
@@ -39,6 +41,21 @@ router.get('/', (req, res) => {
 
 });
 
+router.get('/units/:unit_id/delete', (req, res) => {
+  Unit.delete(`WHERE unit_id = '${req.params.unit_id}'`).then(result => {
+    res.redirect('/admin');
+  }).catch(e => {
+    res.redirect('/admin');
+  })
+});
+
+router.get('/members/:otp/delete', (req, res) => {
+  Member.delete(`WHERE otp = '${req.params.otp}'`).then(result => {
+    res.redirect('/admin');
+  }).catch(e => {
+    res.redirect('/admin');
+  })
+});
 
 router.post('/', (req, res) => {
 
