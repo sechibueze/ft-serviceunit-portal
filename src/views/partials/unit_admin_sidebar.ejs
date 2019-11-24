@@ -1,0 +1,14 @@
+<div class="appname">
+  <h1 class="admin-logo">SU </h1>
+  <h1 class="fa fa-bars admin-menu-icon"></h1>
+  <span class="sidebar-toggle-btn fa fa-times-circle"></span>
+</div>
+<ul class="options">
+  <!-- <li><i class="fa fa-plus-circle"></i> <a href="/admin?page=add_unit&add_unit=true">Add Unit</a></li>
+  <li><i class="fa fa-book"></i> <a href="/admin?page=unit_list&unit_list=true">View Units</a></li> -->
+  <li><i class="fa fa-user-check"></i> <a href="/units/admin/dashboard">Home</a></li>
+  <li><i class="fa fa-users"></i> <a
+      href="/units/admin/dashboard?unit_id=<%= result.admin.unit_id %>&unit_members=true">Members</a>
+  </li>
+  <li><i class="fa fa-arrow-circle-left"></i> <a href="/units/admin/dashboard/logout">Logout</a></li>
+</ul>

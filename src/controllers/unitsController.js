@@ -5,7 +5,7 @@ const format = require('pg-format');
 
 const Model = require('../models/model');
 const changeCase = require('../helpers/changeCase');
-
+const checkUnitAdmin = require('../middlewares/checkUnitAdmin');
 const Member = new Model('members');
 const Unit = new Model('units');
 const router = express.Router();
@@ -13,16 +13,20 @@ const router = express.Router();
 
 
 router.get('/:unit', (req, res) => {
-  Unit.select('unit', `WHERE unit_id = '${req.params.unit}'`)
+  Unit.select('unit_id, unit', `WHERE unit_id = '${req.params.unit}'`)
     .then(({ rows }) => {
-      const data = {
-        result: {
-          posturl: `/units/${req.params.unit}`,
-          unit: rows[0].unit.toUpperCase()
+      if (rows.length > 0) {
+        const data = {
+          result: {
+            posturl: `/units/${req.params.unit}`,
+            unit: rows[0].unit.toUpperCase()
 
+          }
         }
+        return res.render('register', data);
+      } else {
+        return res.redirect('/');
       }
-      return res.render('register', data);
 
 
     }).catch(e => {
@@ -92,6 +96,84 @@ router.post('/:unit', (req, res) => {
       return res.render('message', data);
 
     });
+});
+
+
+// Unit Admins
+router.get('/auth/login', (req, res) => {
+
+  const data = {
+    result: {
+      message: req.session.unit_message,
+    }
+  }
+
+  return res.render('unit_login', data);
+
+});
+
+router.post('/auth/login', (req, res) => {
+  // Get required fields
+  console.log('body: ', req.body)
+  let clause = `WHERE unit_username='${req.body.unit_username}' AND unit_password='${req.body.unit_password}'`;
+  Unit.select('unit_id, unit, unit_username, unit_password', clause)
+    .then(({ rows }) => {
+      if (rows.length === 1) {
+        req.session.unit_auth = rows[0];
+
+        
+        return res.redirect('/units/admin/dashboard');
+      } else {
+        req.session.unit_message = 'Admin Not Found';
+        return res.redirect('/units/auth/login');
+      }
+    })
+    .catch(e => {
+      req.session.unit_message = 'OAuth Failed';
+      return res.redirect('/units/auth/login');
+    });
+
+});
+
+router.get('/admin/dashboard', checkUnitAdmin, (req, res) => {
+  let data = {
+    result: {
+      query: req.query,
+      param: req.session.unit_id,
+      message: '',
+      admin: req.session.unit_auth,
+      data: []
+    }
+  }
+
+  if ((req.query.unit_id == req.session.unit_auth.unit_id) && req.query.unit_members) {
+    console.log('request Query: ', req.query)
+    Member.select('*', `WHERE unit = '${req.session.unit_auth.unit_id}'`)
+      .then(({ rows }) => {
+        if (rows.length > 0) {
+          data.result.data = rows;
+
+          return res.render('unit_admin', data)
+        } else {
+          data.result.message = 'No Member yet';
+
+          return res.render('unit_admin', data)
+        }
+      }).catch(e => {
+        data.result.message = 'cannot get members';
+
+        return res.render('unit_admin', data)
+      })
+  } else {
+
+    return res.render('unit_admin', data)
+  }
+
+
+});
+router.get('/admin/dashboard/logout', (req, res) => {
+  req.session.unit_auth = null;
+  return res.redirect('/units/auth/login')
 });
 
 

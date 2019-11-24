@@ -50,7 +50,8 @@ const createTables = () => {
       id SERIAL NOT NULL PRIMARY KEY,
       unit_id VARCHAR(255) NOT NULL UNIQUE,
       unit VARCHAR(255) NOT NULL UNIQUE,
-      unit_logo VARCHAR(255) 
+      unit_username VARCHAR(255) NOT NULL UNIQUE,
+      unit_password VARCHAR(255) NOT NULL UNIQUE
     );
   `;
   // Run the Query

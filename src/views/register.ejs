@@ -5,7 +5,7 @@
 
   <div class="container">
     <h1 class="section-heading"><%= result.unit %> <br> Member Registeration </h1>
-    <h3></h3>
+    <h4 class="sub-heading"><a href="/confirm">Already registered? Confirm</a></h4>
     <form name="member-reg" method="POST" action="<%= result.posturl %>">
 
       <article class="message"> </article>
@@ -51,8 +51,8 @@
         </select>
       </div>
       <div class="form-group">
-        <label for="station">Station:</label>
-        <input class="form-control" type="text" name="station" placeholder="Enter your Station" required>
+        <label for="station">Home Station:</label>
+        <input class="form-control" type="text" name="station" placeholder="Where You Are Coming From" required>
       </div>
       <!-- <div class="form-group">
         <label for="part">Part:</label>

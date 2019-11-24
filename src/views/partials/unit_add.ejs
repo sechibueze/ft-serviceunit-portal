@@ -1,13 +1,23 @@
 <form action="/admin" method="POST">
 
   <div class="form-element">
-    <label for="unit_id">Unit ID</label>
-    <input class="form-control" name="unit_id" type="text" required />
+    <label for="unit_id">Unit ID:</label>
+    <input class="form-control" name="unit_id" type="text" required placeholder="Unit ID" />
   </div>
 
   <div class="form-element">
-    <label for="unit">Unit </label>
-    <input name="unit" class="form-control" type="text" required />
+    <label for="unit">Unit Name:</label>
+    <input name="unit" class="form-control" type="text" required placeholder="Unit Name" />
+  </div>
+
+  <div class="form-element">
+    <label for="unit_username">Unit Username:</label>
+    <input name="unit_username" placeholder="Unit Username" class="form-control" type="text" required />
+  </div>
+
+  <div class="form-element">
+    <label for="unit_password">Unit Password:</label>
+    <input name="unit_password" placeholder="Unit Password" class="form-control" type="password" required />
   </div>
 
   <button type="submit" class="btn btn-primary">Add Unit</button>

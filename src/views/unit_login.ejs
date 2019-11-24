@@ -1,0 +1,42 @@
+<% include partials/head %>
+
+<body>
+  <section id="su-login">
+    <div class="container">
+      <form action="/units/auth/login" method="POST" name="su-login">
+
+        <!-- <h1 class="section-heading"> <%= result.unit %></h1> -->
+        <h4 class="sub-heading"> Unit Admin Login</h4>
+        <% if (result.message){%>
+        <div class="message"><%= result.message %></div>
+        <%} %>
+
+        <div class="form-element">
+          <label for="firstname">
+            Firstname :
+          </label>
+          <input required name="firstname" class="form-control" type="text" placeholder="Firstname" />
+        </div>
+
+        <div class="form-element">
+          <label for="username">
+            Username :
+          </label>
+          <input required name="unit_username" class="form-control" type="text" placeholder="Username" />
+        </div>
+
+        <div class="form-element">
+          <label for="password">
+            Password :
+          </label>
+          <input required name="unit_password" class="form-control" type="password" placeholder="Password" />
+        </div>
+
+        <button type="submit" class="form-control btn btn-primary">Login</button>
+      </form>
+    </div>
+  </section>
+
+</body>
+
+</html>

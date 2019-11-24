@@ -40,9 +40,8 @@ app.get('/logout', (req, res, next) => {
   res.redirect('/auth');
 });
 app.use('/confirm', confirmController);
-
-app.use('/auth', authController);
 app.use('/units', unitsController);
+app.use('/auth', authController);
 app.use('/admin', checkAdmin, adminController);
 app.use('/', indexController);
 

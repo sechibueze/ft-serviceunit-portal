@@ -18,13 +18,13 @@
       <%} %>
 
       <div class="">
-        <% if( result.query.unit_list){ %>
+        <% if(result.query && result.query.unit_list){ %>
         <% include partials/unit_list %>
-        <%} else if(result.query.add_unit) {%>
+        <%} else if(result.query && result.query.add_unit) {%>
         <% include partials/unit_add %>
-        <%} else if(result.query.members) {%>
+        <%} else if(result.query && result.query.members) {%>
         <% include partials/member_list %>
-        <%} else if(result.query.data_reset) {%>
+        <%} else if(result.query && result.query.data_reset) {%>
         <% include partials/data_reset %>
         <%} else {%>
       </div>

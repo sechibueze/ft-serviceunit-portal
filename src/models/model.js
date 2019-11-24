@@ -15,7 +15,7 @@ module.exports = class Model {
   insert(fields, values, clause = '') {
     // const placeholder = this.prepareFields(values);//Object.keys(fields);
     const query = `INSERT INTO ${this.table} (${fields}) VALUES (${values}) ${clause}`;
-    console.log('indertQuery: ', query);
+    // console.log('indertQuery: ', query);
     return this.pool.query(query, values);
   }
   insertBulk(query) {
@@ -24,7 +24,7 @@ module.exports = class Model {
   }
 
   insertQuery(text, values) {
-
+    // console.log(text, values)
     return this.pool.query(text, values);
   }
 

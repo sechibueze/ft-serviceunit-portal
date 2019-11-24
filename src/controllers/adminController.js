@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
   if (req.query.unit_list) {
     Unit.select('*').then(({ rows }) => {
       output.result.data = sortObjArray(rows, 'unit');
-      console.log('data', rows[0])
+
       return res.render('admin', output);
     }).catch(e => {
       res.redirect('/admin');
@@ -60,10 +60,12 @@ router.get('/members/:otp/delete', (req, res) => {
 router.post('/', (req, res) => {
 
   // console.log(req.body);
-  const text = `INSERT INTO units (unit_id, unit) VALUES ($1, $2)`;
+  const text = `INSERT INTO units (unit_id, unit, unit_username, unit_password) VALUES ($1, $2, $3, $4) RETURNING unit_username, unit_id, unit`;
   const values = [
     req.body.unit_id,
-    req.body.unit
+    req.body.unit,
+    req.body.unit_username,
+    req.body.unit_password
   ];
   Unit.insertQuery(text, values).then(({ rows }) => {
     // console.log('rows : ', rows)
@@ -76,9 +78,11 @@ router.post('/', (req, res) => {
       }
     };
     return res.render('admin', data);
+    // return res.redirect('/admin');
   }).catch(e => {
     const data = {
       result: {
+        query: req.query,
         admin: req.session.auth,
         message: 'Inserted failed'
       }
@@ -109,16 +113,7 @@ router.post('/data_reset', (req, res) => {
 });
 
 
-// router.post('/login', (req, res) => {
-//   const admin = req.body;
-//   if (process.env.ADMIN_USERNAME === admin.username && process.env.ADMIN_PWD === admin.password) {
-//     req.session.auth = admin;
-//     return res.redirect('/auth');
-//   } else {
-//     return res.render('auth', { message: `Auth Failed` })
-//   }
 
-// });
 
 
 
