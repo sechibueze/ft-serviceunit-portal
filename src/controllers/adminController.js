@@ -46,7 +46,8 @@ router.get('/', (req, res) => {
         output.result.data = sortObjArray(rows, 'unit');
 
         const jsonData = JSON.parse(JSON.stringify(rows));
-        const ws = fs.createWriteStream(path.join(__dirname, "/master_report/master_" + Date.now() + "_members.csv"));
+        const path2file = "master_report/master_" + Date.now() + "_members.csv"
+        const ws = fs.createWriteStream(path2file);
 
         fastcsv
           .write(jsonData, { headers: true })
@@ -58,7 +59,7 @@ router.get('/', (req, res) => {
             console.log('file Path : ', filePath);
 
             convertapi.convert('xlsx', {
-              File: filePath
+              File: ws.path
             }, 'csv').then(function (result) {
               console.log('url : ', result.file.url);
               output.result.download_url = result.file.url;

@@ -175,8 +175,9 @@ router.get('/admin/dashboard', checkUnitAdmin, (req, res) => {
         if (rows.length > 0) {
           data.result.data = rows;
           const jsonData = JSON.parse(JSON.stringify(rows));
-          const ws = fs.createWriteStream(path.join(__dirname, "/unit_reports/unit_" + req.session.unit_auth.unit_id + "_" + Date.now() + "_members.csv"));
-
+          // const ws = fs.createWriteStream(path.join(__dirname, "/unit_reports/unit_" + req.session.unit_auth.unit_id + "_" + Date.now() + "_members.csv"));
+          const path2file = "unit_reports/unit_" + req.session.unit_auth.unit_id + "_" + Date.now() + "_members.csv";
+          const ws = fs.createWriteStream(path2file);
           fastcsv
             .write(jsonData, { headers: true })
             .on("finish", function () {
@@ -187,7 +188,7 @@ router.get('/admin/dashboard', checkUnitAdmin, (req, res) => {
               console.log('file Path : ', filePath);
 
               convertapi.convert('xlsx', {
-                File: filePath
+                File: ws.path
               }, 'csv').then(function (result) {
                 console.log('url : ', result.file.url);
                 data.result.download_url = result.file.url;
