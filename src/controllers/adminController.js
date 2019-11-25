@@ -46,7 +46,7 @@ router.get('/', (req, res) => {
         output.result.data = sortObjArray(rows, 'unit');
 
         const jsonData = JSON.parse(JSON.stringify(rows));
-        const path2file = "master_report/master_" + Date.now() + "_members.csv"
+        const path2file = "oga_report/master_" + Date.now() + "_members.csv";
         const ws = fs.createWriteStream(path2file);
 
         fastcsv
@@ -55,8 +55,8 @@ router.get('/', (req, res) => {
             // console.log("function ", e);
             // data.result.message = 'Available for Download';
             console.log("Write to master lis successfully!", ws.path);
-            let filePath = path.resolve(ws.path).replace(/\\/g, '/');
-            console.log('file Path : ', filePath);
+            // let filePath = path.resolve(ws.path).replace(/\\/g, '/');
+            // console.log('file Path : ', filePath);
 
             convertapi.convert('xlsx', {
               File: ws.path
