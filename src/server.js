@@ -33,8 +33,18 @@ app.use((req, res, next) => {
   next();
 });
 
+const convertapi = require('convertapi')('kzLilZfkq0ehV0wy');
+// const path = require('path')
+app.get('/report', (req, res) => {
 
 
+  convertapi.convert('xlsx', {
+    File: 'to_excel.csv'
+  }, 'csv').then(function (result) {
+    console.log('url : ', result.file.url)
+
+  });
+})
 app.get('/logout', (req, res, next) => {
   req.session.auth = null;
   res.redirect('/auth');

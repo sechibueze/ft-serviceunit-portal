@@ -1,4 +1,8 @@
 const express = require('express');
+const fastcsv = require("fast-csv");
+const fs = require("fs");
+const path = require('path');
+const convertapi = require('convertapi')(process.env.CONVERTAPI_KEY);
 
 const Model = require('../models/model');
 const sortObjArray = require('../helpers/sortObjArray');
@@ -15,7 +19,8 @@ router.get('/', (req, res) => {
   let output = {
     result: {
       query: req.query,
-      admin: req.session.auth
+      admin: req.session.auth,
+      download_url: ''
     }
   }
   if (req.query.unit_list) {
@@ -33,7 +38,49 @@ router.get('/', (req, res) => {
       return res.render('admin', output);
     }).catch(e => {
       res.redirect('/admin');
-    })
+    });
+  } else if (req.query.master_report) {
+    Member.select('*').then(({ rows }) => {
+
+      if (rows.length > 0) {
+        output.result.data = sortObjArray(rows, 'unit');
+
+        const jsonData = JSON.parse(JSON.stringify(rows));
+        const ws = fs.createWriteStream(path.join(__dirname, "/master_report/master_" + Date.now() + "_members.csv"));
+
+        fastcsv
+          .write(jsonData, { headers: true })
+          .on("finish", function () {
+            // console.log("function ", e);
+            // data.result.message = 'Available for Download';
+            console.log("Write to master lis successfully!", ws.path);
+            let filePath = path.resolve(ws.path).replace(/\\/g, '/');
+            console.log('file Path : ', filePath);
+
+            convertapi.convert('xlsx', {
+              File: filePath
+            }, 'csv').then(function (result) {
+              console.log('url : ', result.file.url);
+              output.result.download_url = result.file.url;
+              return res.render('admin', output);
+            }).catch(e => {
+
+              output.result.message = 'Failed to generate report';
+              return res.render('admin', output);
+            });
+
+          })
+          .pipe(ws);
+      } else {
+
+        return res.render('admin', output);
+      }
+
+
+    }).catch(e => {
+      res.redirect('/admin');
+    });
+
   } else {
 
     return res.render('admin', output);

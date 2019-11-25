@@ -9,28 +9,23 @@
       <div class="admin-navbar">
         <% if (result.admin.unit_username){%>
         <h1> Hi <%= result.admin.unit_username %></h1>
-
         <%} %>
 
         <% if (result.admin.unit){%>
         <h5> IHD - <%= result.admin.unit %></h5>
-
         <%} %>
-
-
       </div>
       <% if (result.message){%>
       <div class="message"><%= result.message %></div>
       <%} %>
       <div class="">
-
-
         <%  if(result.query.unit_members) {%>
         <% include partials/unit_member_list %>
-
-        <%} else {%>
       </div>
+      <%} else if(result.query.unit_export_to_csv) {%>
+      <% include partials/unit_admin_report %>
 
+      <%} else {%>
       <div> What do you want to do</div>
       <%}%>
 

@@ -1,0 +1,53 @@
+<div class="">
+  <% if(result.download_url){ %>
+  <a class="btn" href="<%= result.download_url %>" target="_blank">Download Report</a>
+  <%}%>
+
+  <!-- <% if(result.message){ %>
+  <article class="message"><%= result.message %></article>
+  <%}%> -->
+
+  <% if(result.data.length > 0){
+      let count = 0 %>
+  <!-- Put up table -->
+  <h1 class="section-heading">Registered Members Report</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>S/N</th>
+        <th>Surname</th>
+        <th>Firstname</th>
+        <th>Unit</th>
+        <th>OTP</th>
+        <th>Phone</th>
+        <th>Gender</th>
+        <th>Availability</th>
+        <th>Station</th>
+        <!-- <th>Delete</th> -->
+      </tr>
+    </thead>
+    <tbody>
+      <% result.data.forEach(record => {
+          %>
+      <tr>
+        <td><%= ++count %></td>
+        <td><%= record.surname %></td>
+        <td><%= record.firstname %></td>
+        <td><%= record.unit %></td>
+        <td><%= record.otp %></td>
+        <td><%= record.phone %></td>
+        <td><%= record.gender %></td>
+        <td><%= record.availability %></td>
+        <td><%= record.station %></td>
+        <!-- <td><a href="/admin/members/<%= record.otp %>/delete">Delete</a></td> -->
+      </tr>
+      <%})%>
+    </tbody>
+
+  </table>
+  <% } else {%>
+  <h1 class="section-heading">No Registration Yet </h1>
+  <%}%>
+
+  
+</div>

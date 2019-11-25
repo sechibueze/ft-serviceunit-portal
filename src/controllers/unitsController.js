@@ -1,6 +1,11 @@
 const express = require('express');
 const otpg = require('otp-generator');
-const format = require('pg-format');
+const fastcsv = require("fast-csv");
+const downloadCSV = require('download-csv');
+const fs = require("fs");
+const path = require('path');
+const convertapi = require('convertapi')(process.env.CONVERTAPI_KEY);
+
 
 
 const Model = require('../models/model');
@@ -9,7 +14,6 @@ const checkUnitAdmin = require('../middlewares/checkUnitAdmin');
 const Member = new Model('members');
 const Unit = new Model('units');
 const router = express.Router();
-
 
 
 router.get('/:unit', (req, res) => {
@@ -121,7 +125,7 @@ router.post('/auth/login', (req, res) => {
       if (rows.length === 1) {
         req.session.unit_auth = rows[0];
 
-        
+
         return res.redirect('/units/admin/dashboard');
       } else {
         req.session.unit_message = 'Admin Not Found';
@@ -142,12 +146,13 @@ router.get('/admin/dashboard', checkUnitAdmin, (req, res) => {
       param: req.session.unit_id,
       message: '',
       admin: req.session.unit_auth,
+      download_url: '',
       data: []
     }
   }
 
   if ((req.query.unit_id == req.session.unit_auth.unit_id) && req.query.unit_members) {
-    console.log('request Query: ', req.query)
+    // console.log('request Query: ', req.query)
     Member.select('*', `WHERE unit = '${req.session.unit_auth.unit_id}'`)
       .then(({ rows }) => {
         if (rows.length > 0) {
@@ -163,7 +168,66 @@ router.get('/admin/dashboard', checkUnitAdmin, (req, res) => {
         data.result.message = 'cannot get members';
 
         return res.render('unit_admin', data)
-      })
+      });
+  } else if (req.query.unit_export_to_csv) {
+    Member.select('*', `WHERE unit = '${req.session.unit_auth.unit_id}'`)
+      .then(({ rows }) => {
+        if (rows.length > 0) {
+          data.result.data = rows;
+          const jsonData = JSON.parse(JSON.stringify(rows));
+          const ws = fs.createWriteStream(path.join(__dirname, "/unit_reports/unit_" + req.session.unit_auth.unit_id + "_" + Date.now() + "_members.csv"));
+
+          fastcsv
+            .write(jsonData, { headers: true })
+            .on("finish", function () {
+              // console.log("function ", e);
+              // data.result.message = 'Available for Download';
+              console.log("Write to unit_members.csv successfully!", ws.path);
+              let filePath = path.resolve(ws.path).replace(/\\/g, '/');
+              console.log('file Path : ', filePath);
+
+              convertapi.convert('xlsx', {
+                File: filePath
+              }, 'csv').then(function (result) {
+                console.log('url : ', result.file.url);
+                data.result.download_url = result.file.url;
+                return res.render('unit_admin', data);
+              }).catch(e => {
+
+                data.result.message = 'Failed to generate report';
+                return res.render('unit_admin', data);
+              });
+
+            })
+            .pipe(ws);
+          // console.log("Write to unit_members.csv successfully!", ws.path);
+          // let filePath = path.resolve(ws.path).replace(/\\/g, '/');
+          // console.log('file Path : ', filePath);
+
+          // convertapi.convert('xlsx', {
+          //   File: filePath
+          // }, 'csv').then(function (result) {
+          //   console.log('url : ', result.file.url);
+          //   data.result.download_url = result.file.url;
+          //   return res.render('unit_admin', data);
+          // }).catch(e => {
+
+          //   data.result.message = 'Failed to generate report';
+          //   return res.render('unit_admin', data);
+          // });
+
+
+        } else {
+          data.result.message = 'No Member yet';
+
+          return res.render('unit_admin', data)
+        }
+      }).catch(e => {
+        data.result.message = 'cannot get members';
+
+        return res.render('unit_admin', data)
+      });
+
   } else {
 
     return res.render('unit_admin', data)

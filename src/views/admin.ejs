@@ -24,6 +24,8 @@
         <% include partials/unit_add %>
         <%} else if(result.query && result.query.members) {%>
         <% include partials/member_list %>
+        <%} else if(result.query && result.query.master_report) {%>
+        <% include partials/master_report %>
         <%} else if(result.query && result.query.data_reset) {%>
         <% include partials/data_reset %>
         <%} else {%>
