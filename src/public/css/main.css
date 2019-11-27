@@ -209,12 +209,21 @@ img.banner{
   }
 
   footer{
-    background: #111;
-    color: rgb(100, 207, 38);
+    
     text-align: left;
     padding: 6px 20px;
-    position: fixed;
-    bottom: 0px;
+    
     width: 50%;
     opacity: .8;
+    
+  }
+
+  .footer-text{
+    background: red;
+    color: #fff;
+    font-size: 12px;
+    padding: 5px 12px;
+    position: fixed;
+    bottom: 0px;
+    left: 0;
   }
