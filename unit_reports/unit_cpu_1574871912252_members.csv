@@ -1,0 +1,3 @@
+user_id,unit_id,surname,firstname,unit,gender,phone,station,availability,otp,entry_date
+10,cpu,CHIBUEZE,SAMUEL,cpu,FEMALE,08110402629,tyui89,"TUES,THURS,SAT",xCvHmX,2019-11-25T23:00:00.000Z
+13,cpu897,WASIU,SAM,cpu,MALE,02012356489,Lagos,"TUES,FRI,SUN",pi4Wnf,2019-11-26T23:00:00.000Z
